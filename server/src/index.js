@@ -57,24 +57,37 @@ app.get("/notes/:id", (req, res) => {
   }
 });
 
-// create a new note
-app.post("/notes", (req, res) => {
+// calculate and return a new id
+const generateId = () => {
   // calculate the max id of current notes data
   const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0;
 
-  console.log("maxId", maxId); // 3
+  return maxId + 1;
+};
 
-  // get the note in the current request
-  const note = req.body;
-  console.log(note);
+// add a new note to notes
+app.post("/notes", (req, res) => {
+  const body = req.body;
 
-  // set the new note's id
-  note.id = maxId + 1;
+  // return error if missing content
+  if (!body.content) {
+    return res.status(400).json({
+      error: "content missing"
+    });
+  }
+
+  // new note to add
+  const note = {
+    content: body.content,
+    important: body.important || false,
+    date: new Date(),
+    id: generateId()
+  };
 
   // add the new note to the existing
   notes = notes.concat(note);
 
-  // just send the note back in response
+  // send the note back in response
   res.json(note);
 });
 

@@ -1,3 +1,4 @@
+# Create a new note
 POST http://localhost:3001/notes
 Content-Type: application/json
 
@@ -5,3 +6,12 @@ Content-Type: application/json
     "content": "Added with via express api",
     "important": true
 }
+
+# test missing content request
+POST http://localhost:3001/notes
+Content-Type: application/json
+
+{
+    "important": true
+}
+
