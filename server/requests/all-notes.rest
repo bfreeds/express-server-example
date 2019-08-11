@@ -1,0 +1,3 @@
+GET http://localhost:3001/notes
+
+GET http://localhost:3001/notes/1

@@ -23,15 +23,37 @@ let notes = [
   }
 ];
 
+// default route returns an html message
 app.get("/", (req, res) => {
   res.send("<h1>Hello World</h1>");
 });
 
+// gets all notes
 app.get("/notes", (req, res) => {
   console.log(req);
 
   res.json(notes);
 });
+
+// get a single note
+app.get("/notes/:id", (req, res) => {
+  const id = Number(req.params.id);
+  console.log(`note ${id} requested.`);
+
+  const note = notes.find(note => {
+    return note.id === id;
+  });
+  console.log(note);
+
+  // respond with note data if found, 404 if not
+  if (note) {
+    res.json(note);
+  } else {
+    res.status(404).end();
+  }
+});
+
+// start the server
 const port = 3001;
 
 app.listen(port);
