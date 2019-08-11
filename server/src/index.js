@@ -1,10 +1,12 @@
 const express = require("express");
 
 const app = express();
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const customLogger = require("./middleware/customLogger");
 
-// adds body data to express request object
+// configure express app to use our middleware
+app.use(cors()); // allow cross origin requests
 app.use(bodyParser.json());
 app.use(customLogger);
 
@@ -94,7 +96,7 @@ app.post("/notes", (req, res) => {
 });
 
 // start the server
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.listen(port);
 
