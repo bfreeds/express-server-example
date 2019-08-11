@@ -18,5 +18,8 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
