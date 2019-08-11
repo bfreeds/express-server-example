@@ -2,9 +2,11 @@ const express = require("express");
 
 const app = express();
 const bodyParser = require("body-parser");
+const customLogger = require("./middleware/customLogger");
 
 // adds body data to express request object
 app.use(bodyParser.json());
+app.use(customLogger);
 
 let notes = [
   {
