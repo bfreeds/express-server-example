@@ -1,3 +1,6 @@
 GET http://localhost:3001/notes
 
 GET http://localhost:3001/notes/4
+
+# Check Heroku Deployment
+GET https://gentle-thicket-42530.herokuapp.com/notes
